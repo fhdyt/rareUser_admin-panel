@@ -6,11 +6,31 @@
     <div
       class="rounded-lg overflow-hidden shadow-lg w-1/4 mx-4 h-full bg-gray-50 border border-gray-200 mb-4"
     >
-      <img
-        class="h-full w-full object-cover"
-        :src="influencer[0].pic"
-        alt="Mountain"
-      />
+      <div class="relative">
+        <img
+          class="h-full w-full object-cover"
+          :src="influencer[0].pic"
+          alt="Mountain"
+        />
+        <div class="absolute bottom-3 left-0 ...">
+          <router-link
+            :to="{
+              name: 'PicForm',
+              params: { id: id },
+              state: { name: influencer[0].name },
+            }"
+          >
+            <div
+              class="overflow-hidden w-auto shadow p-2 rounded-lg bg-yellow-500 mx-3 flex justify-center align-middle px-9"
+            >
+              <button>
+                <font-awesome-icon color="#ffffff" icon="fa-solid fa-pencil" />
+              </button>
+            </div>
+          </router-link>
+        </div>
+      </div>
+
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">{{ influencer[0].name }}</div>
         <p class="text-gray-700 text-base">

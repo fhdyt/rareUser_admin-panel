@@ -9,23 +9,7 @@
           <div>
             <div class="pb-3">
               <p class="text-2xl font-bold text-center">{{ influener_name }}</p>
-              <p class="text-lg font-bold text-center">Post</p>
-            </div>
-            <div class="pb-3">
-              <input
-                v-model="formData.url"
-                type="text"
-                class="relative block w-full appearance-none rounded-full border border-gray-300 px-5 py-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Url"
-              />
-            </div>
-            <div class="pb-1">
-              <input
-                v-model="formData.source"
-                type="text"
-                class="relative block w-full appearance-none rounded-full border border-gray-300 px-5 py-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                placeholder="Source"
-              />
+              <p class="text-lg font-bold text-center">Picture</p>
             </div>
             <div class="pb-3">
               <input
@@ -52,16 +36,10 @@
 <script>
 import axios from "axios";
 export default {
-  name: "PostFrom",
+  name: "PicForm",
   data() {
     return {
-      formData: {
-        name: "",
-        gender: "",
-        country: "",
-        tags: "",
-        desc: "",
-      },
+      formData: {},
       selectedFile: null,
       influener_name: "",
     };
@@ -69,6 +47,7 @@ export default {
   mounted() {
     this.id = this.$route.params.id;
     this.influener_name = window.history.state.name;
+    console.log(this.id);
   },
   methods: {
     onFileChange(e) {
@@ -80,12 +59,10 @@ export default {
       this.$isLoading(true);
       try {
         const fd = new FormData();
-        fd.append("url", this.formData.url);
-        fd.append("source", this.formData.source);
-        fd.append("file", this.selectedFile, this.selectedFile.name);
 
-        const response = await axios.post(
-          process.env.VUE_APP_ROOTURL + "/posts/" + this.id + "",
+        fd.append("pic", this.selectedFile, this.selectedFile.name);
+        const response = await axios.patch(
+          process.env.VUE_APP_ROOTURL + "/influencer/pic/" + this.id + "",
           fd
         );
         console.log(response.data);
@@ -100,4 +77,3 @@ export default {
   },
 };
 </script>
-<style lang=""></style>

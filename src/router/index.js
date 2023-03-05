@@ -7,6 +7,7 @@ import CountryForm from '../components/CountryForm.vue'
 import PlatformForm from '../components/PlatformForm.vue'
 import PostForm from '../components/PostForm.vue'
 import InfluencerForm from '../components/InfluencerForm.vue'
+import PicForm from '../components/PicForm.vue'
 
 const routes = [
   {
@@ -28,6 +29,11 @@ const routes = [
     path: '/influencer/form',
     name: 'InfluencerForm',
     component: InfluencerForm,
+  },
+  {
+    path: '/influencer/picform/:id',
+    name: 'PicForm',
+    component: PicForm,
   },
   {
     path: '/country',

@@ -28,10 +28,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faUserSecret, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faPlus, faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faUserSecret, faPlus, faTrashCan)
+library.add(faUserSecret, faPlus, faTrashCan, faPencil)
 
 
 app.use(router)

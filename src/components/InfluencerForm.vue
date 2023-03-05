@@ -109,6 +109,7 @@ export default {
         console.log(response.data);
         console.log(this.formData);
         this.$isLoading(false);
+        this.$router.go(-1);
       } catch (error) {
         console.error(error);
         this.$isLoading(false);

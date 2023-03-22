@@ -26,6 +26,21 @@
             <h5 class="text-xl font-medium mb-2 pb-2">
               {{ i.name }}
             </h5>
+            <router-link
+              :to="{
+                name: 'ScoreForm',
+                params: { id: i._id },
+                state: { name: i.name },
+              }"
+            >
+              <div class="flex flex-row pb-2 pr-2">
+                <div
+                  class="w-auto shadow p-1 rounded-lg bg-green-400 flex justify-center align-middle px-9"
+                >
+                  {{ i.score.$numberDecimal }}
+                </div>
+              </div>
+            </router-link>
             <p class="text-xs pb-2">{{ i.desc }}</p>
             <p class="text-xs pb-2">{{ i.country.name }}</p>
             <div class="py-2">
@@ -63,6 +78,7 @@ export default {
         .get(process.env.VUE_APP_ROOTURL + "/influencer")
         .then((response) => {
           this.influencer = response.data;
+          console.log(this.influencer);
           this.$isLoading(false);
         })
         .catch((error) => {

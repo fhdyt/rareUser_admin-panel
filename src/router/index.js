@@ -8,6 +8,7 @@ import PlatformForm from '../components/PlatformForm.vue'
 import PostForm from '../components/PostForm.vue'
 import InfluencerForm from '../components/InfluencerForm.vue'
 import PicForm from '../components/PicForm.vue'
+import ScoreForm from '../components/ScoreForm.vue'
 
 const routes = [
   {
@@ -51,6 +52,11 @@ const routes = [
     component: PlatformForm
   },
   {
+    path: '/platform/score/:id',
+    name: 'ScoreForm',
+    component: ScoreForm
+  },
+  {
     path: '/postform/form/:id',
     name: 'PostForm',
     component: PostForm
@@ -59,6 +65,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  base: 'admin-rare-user',
   routes
 })
 

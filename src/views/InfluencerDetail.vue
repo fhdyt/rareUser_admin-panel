@@ -37,6 +37,23 @@
           {{ influencer[0].country["name"] }}
         </p>
       </div>
+      <div class="px-6 py-4">
+        <router-link
+          :to="{
+            name: 'ScoreForm',
+            params: { id: id },
+            state: { name: influencer[0].name },
+          }"
+        >
+          <div class="flex flex-row pb-2 pr-2">
+            <div
+              class="w-auto shadow p-2 rounded-lg bg-green-400 flex justify-center align-middle px-11"
+            >
+              {{ influencer[0].score.$numberDecimal }}
+            </div>
+          </div>
+        </router-link>
+      </div>
       <div class="px-6 pt-4 pb-2">
         <span
           v-for="tags in influencer[0].tags"

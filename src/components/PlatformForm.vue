@@ -19,6 +19,16 @@
                 placeholder="Platform"
               />
             </div>
+            <div class="pb-3">
+              <span
+                v-for="i in social_media"
+                :key="i"
+                @click="selSocial(i.name)"
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >{{ i.name }}</span
+              >
+            </div>
+
             <div class="pb-1">
               <input
                 v-model="formData.username"
@@ -61,13 +71,35 @@ export default {
         link: "",
       },
       influener_name: "",
+      social_media: [],
     };
   },
   mounted() {
+    this.fetchSocialMedia();
     this.id = this.$route.params.id;
     this.influener_name = window.history.state.name;
   },
   methods: {
+    selSocial(value) {
+      console.log(value);
+      this.formData.platform = value;
+    },
+
+    async fetchSocialMedia() {
+      console.log("adfasdfasdfasdf");
+      this.$isLoading(true);
+      await axios
+        .get(process.env.VUE_APP_ROOTURL + "/social_media")
+        .then((response) => {
+          this.social_media = response.data;
+          console.log(this.social_media);
+          this.$isLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$isLoading(false);
+        });
+    },
     async submitForm() {
       this.$isLoading(true);
       try {

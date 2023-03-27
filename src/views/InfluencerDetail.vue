@@ -61,6 +61,21 @@
           class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
           >{{ tags }}</span
         >
+        <router-link
+          :to="{
+            name: 'TagsForm',
+            params: { id: id },
+            state: {
+              name: influencer[0].name,
+              tags: JSON.stringify(influencer[0].tags),
+            },
+          }"
+        >
+          <span
+            class="inline-block bg-yellow-500 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+            ><font-awesome-icon color="#ffffff" icon="fa-solid fa-pencil"
+          /></span>
+        </router-link>
       </div>
       <div class="px-6 pb-2 flex mr-2 flex-wrap">
         <div

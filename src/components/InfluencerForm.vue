@@ -48,6 +48,15 @@
               />
             </div>
             <div class="pb-3">
+              <span
+                v-for="i in tags"
+                :key="i"
+                @click="selTag(i)"
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >{{ i }}</span
+              >
+            </div>
+            <div class="pb-3">
               <input
                 @change="onFileChange"
                 type="file"
@@ -83,9 +92,36 @@ export default {
         desc: "",
       },
       selectedFile: null,
+      tags: [],
     };
   },
+  mounted() {
+    this.fetchTag();
+  },
   methods: {
+    selTag(value) {
+      console.log(value);
+      var getTags = this.formData.tags;
+      if (this.formData.tags == "") {
+        this.formData.tags = value;
+      } else {
+        this.formData.tags = getTags + " " + value;
+      }
+    },
+    async fetchTag() {
+      this.$isLoading(true);
+      await axios
+        .get(process.env.VUE_APP_ROOTURL + "/search/tags/all")
+        .then((response) => {
+          this.tags = response.data;
+          console.log(this.tags);
+          this.$isLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$isLoading(false);
+        });
+    },
     onFileChange(e) {
       console.log(e);
       this.selectedFile = e.target.files[0];

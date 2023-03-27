@@ -19,13 +19,22 @@
                 placeholder="Url"
               />
             </div>
-            <div class="pb-1">
+            <div class="pb-3">
               <input
                 v-model="formData.source"
                 type="text"
                 class="relative block w-full appearance-none rounded-full border border-gray-300 px-5 py-3 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Source"
               />
+            </div>
+            <div class="pb-3">
+              <span
+                v-for="i in social_media"
+                :key="i"
+                @click="selSocial(i.name)"
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >{{ i.name }}</span
+              >
             </div>
             <div class="pb-3">
               <input
@@ -64,9 +73,11 @@ export default {
       },
       selectedFile: null,
       influener_name: "",
+      social_media: [],
     };
   },
   mounted() {
+    this.fetchSocialMedia();
     this.id = this.$route.params.id;
     this.influener_name = window.history.state.name;
   },
@@ -74,6 +85,27 @@ export default {
     onFileChange(e) {
       console.log(e);
       this.selectedFile = e.target.files[0];
+    },
+
+    selSocial(value) {
+      console.log(value);
+      this.formData.source = value;
+    },
+
+    async fetchSocialMedia() {
+      console.log("adfasdfasdfasdf");
+      this.$isLoading(true);
+      await axios
+        .get(process.env.VUE_APP_ROOTURL + "/social_media")
+        .then((response) => {
+          this.social_media = response.data;
+          console.log(this.social_media);
+          this.$isLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$isLoading(false);
+        });
     },
     async submitForm() {
       console.log(process.env.VUE_APP_ROOTURL);
@@ -100,4 +132,3 @@ export default {
   },
 };
 </script>
-<style lang=""></style>

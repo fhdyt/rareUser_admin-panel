@@ -75,7 +75,7 @@ export default {
     async fetchData() {
       this.$isLoading(true);
       await axios
-        .get(process.env.VUE_APP_ROOTURL + "/influencer")
+        .get(process.env.VUE_APP_ROOTURL + "/influencer/list/all")
         .then((response) => {
           this.influencer = response.data;
           console.log(this.influencer);
